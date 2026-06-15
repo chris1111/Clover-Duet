@@ -1,7 +1,7 @@
 # Clover-Duet
 ### Credit [Clover Team](https://github.com/CloverHackyColor/CloverBootloader)
 - You can boot a 10.6 System up to macOS Tahoe 26
-- Clover will be Install Clover in the ESP (EFI System Partition) of the target volume
+- Clover will be Install in the ESP (EFI System Partition) of the target volume
 - Clover for Bios (Legacy) Booting.
 - BIOS booting on GPT partition.
 boot0af (boot0 Active First) bootloader try to boot the active partition defined in MBR. If there is no active partition, it will try to boot the first EFI/FAT32/HFS partition (defined in the MBR and then the GPT) with a valid PBR signature.
