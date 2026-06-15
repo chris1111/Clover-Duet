@@ -68,6 +68,8 @@ head
 echo "You have choose Boot6 "
 cp -v "./CloverBootloader/usr/standalone/i386/x64/boot6" "$(diskutil info  disk"${N}"s1 |  sed -n 's/.*Mount Point: *//p')/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
+rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
+Sleep 1
 cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
 echo "Installing EFI -> /Volumes/EFI/EFI "
 p=/tmp/$(uuidgen)/EFI
@@ -95,6 +97,8 @@ head
 echo "You have choose Boot7 "
 cp -v "./CloverBootloader/usr/standalone/i386/x64/boot7" "$(diskutil info  disk"${N}"s1 |  sed -n 's/.*Mount Point: *//p')/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
+rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
+Sleep 1
 cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
 echo "Installing EFI -> /Volumes/EFI/EFI "
 p=/tmp/$(uuidgen)/EFI
