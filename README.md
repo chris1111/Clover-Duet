@@ -12,6 +12,15 @@ This choice will setup selected HFS/Fat32 partition to be active.
 Warning: If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
 Therefore, be sure to back up this folder if necessary!
 
+### Usage: ⬇︎
+- Git Clone
+
+``` bash
+git clone https://github.com/chris1111/Clover-Duet.git
+```
+Or Download ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/archive/refs/heads/main.zip)
+- Run from double clic on `Clover Duet.tool`
+
 <img width="492" height="775" alt="ChooseDisk" src="https://github.com/user-attachments/assets/6015b08d-a790-4c06-82e0-c89444103df2" />
 
 
