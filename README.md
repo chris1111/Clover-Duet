@@ -10,7 +10,7 @@ This choice will setup selected HFS/Fat32 partition to be active.
 
 #### The script will allow you two choices, Boot6 or Boot7, and an EFI Generic folder for Legacy configurations will also be installed.
 
-Warning: If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
+Warning: ⚠️ If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
 Therefore, be sure to back up this folder if necessary!
 
 ### Usage: ⬇︎
