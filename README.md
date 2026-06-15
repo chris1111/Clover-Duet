@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/chris1111/Clover-Duet/blob/main/LICENSE)
+# Linux Tahoe Style Disk
 # Clover-Duet
 ### Credit [Clover Team](https://github.com/CloverHackyColor/CloverBootloader)
 - You can boot a 10.6 System up to macOS Tahoe 26
