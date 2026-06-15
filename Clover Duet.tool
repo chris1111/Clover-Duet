@@ -34,7 +34,7 @@ sudo cp -v ./CloverBootloader/usr/standalone/i386/boot1f32 newbs
 sudo dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc
 sudo dd if=/dev/random of=newbs skip=496 seek=496 bs=1 count=14 conv=notrunc
 sudo dd if=newbs of=/dev/rdisk"${N}"s1
-#if [[ "$(sudo diskutil mount disk"${N}"s1)" == *"mounted" ]]
+# if disk is mount
 if sudo diskutil mount disk"${N}"s1 | grep -q mounted; then
 echo " "
 function echob() {
