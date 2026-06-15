@@ -1,7 +1,7 @@
 #!/bin/bash
 PARENTDIR=$(dirname "$0")
 cd "$PARENTDIR"
-# Clover Duet by chris1111
+# Copyright (c) 2026 chris1111
 # Credit: Clover Team
 # Vars
 apptitle="Installer Clover Duet"
