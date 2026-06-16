@@ -29,6 +29,8 @@ fi
 echo "Type your password to continue!"
 sudo fdisk -uy -f ./CloverBootloader/usr/standalone/i386/boot0af /dev/rdisk"${N}" || exit 1
 diskutil umount disk"${N}"s1
+sudo dd if=/dev/rdisk"${N}" count=1 bs=512 of=newbs
+sudo fdisk -f ./newbs -u -y /dev/rdisk"${N}"
 sudo dd if=/dev/rdisk"${N}"s1 count=1  of=origbs
 sudo cp -v ./CloverBootloader/usr/standalone/i386/boot1f32 newbs
 sudo dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc
