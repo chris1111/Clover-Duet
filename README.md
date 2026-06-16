@@ -9,6 +9,8 @@ boot0af (boot0 Active First) bootloader try to boot the active partition defined
 This choice will setup selected HFS/Fat32 partition to be active.
 
 #### The script will allow you two choices, Boot6 or Boot7, and an EFI Generic folder for Legacy configurations will also be installed.
+- "Boot6 = Clover EFI 64-bits using SATA to access drives. "
+- "Boot7 = Clover EFI 64-bits using Bios Block I/O to access drives. "
 
 Warning: ⚠️ If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
 Therefore, be sure to back up this folder if necessary!
