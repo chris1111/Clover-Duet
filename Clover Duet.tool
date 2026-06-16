@@ -9,6 +9,7 @@ version="1.0"
 find . -name '.DS_Store' -type f -delete
 
 
+
 # Install Clover Duet to the Disk.
 diskutil list
 echo "Make sure the Sip is disabled!"
@@ -26,7 +27,6 @@ if ! diskutil info disk"${N}"s1 | grep -q -e FAT_32 -e EFI; then
 fi
 
 # Write MBR
-echo "Type your password to continue!"
 sudo fdisk -uy -f ./CloverBootloader/usr/standalone/i386/boot0af /dev/rdisk"${N}" || exit 1
 diskutil umount disk"${N}"s1
 sudo dd if=/dev/rdisk"${N}" count=1 bs=512 of=newbs
@@ -73,7 +73,23 @@ echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
 rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
 Sleep 1
 cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
-echo "Installing EFI -> /Volumes/EFI/EFI "
+echo "Installing EFI -> /dev/disk"${N}"s1 "
+install_log="$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI/Clover_Install_Log.txt"
+# ---------------------------------------------
+# Creating log file
+# ---------------------------------------------
+echo "" > "$install_log"
+echo "Clover Duet installer log - $( date )" >> "$install_log"
+echo "Installer Clover EFI bootloader" >> "$install_log"
+echo "======================================================" >> "$install_log"
+diskutil list >> "$install_log"
+echo "==================== Clover Duet =====================" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
+echo ========= Clover Duet install to /dev/disk"${N}"s1 ======= >> "$install_log"
+echo "======================================================" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
+echo "=========== Clover Duet Installation Finish ==========" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
 p=/tmp/$(uuidgen)/EFI
 mkdir -p "${p}" || exit 1
 if diskutil info  disk"${N}" |  grep -q FDisk_partition_scheme; then
@@ -102,7 +118,23 @@ echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
 rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
 Sleep 1
 cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
-echo "Installing EFI -> /Volumes/EFI/EFI "
+echo "Installing EFI -> /dev/disk"${N}"s1 "
+install_log="$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI/Clover_Install_Log.txt"
+# ---------------------------------------------
+# Creating log file
+# ---------------------------------------------
+echo "" > "$install_log"
+echo "Clover Duet installer log - $( date )" >> "$install_log"
+echo "Installer Clover EFI bootloader" >> "$install_log"
+echo "======================================================" >> "$install_log"
+diskutil list >> "$install_log"
+echo "==================== Clover Duet =====================" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
+echo ========= Clover Duet install to /dev/disk"${N}"s1 ======= >> "$install_log"
+echo "======================================================" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
+echo "=========== Clover Duet Installation Finish ==========" >> "${install_log}"
+echo "======================================================" >> "${install_log}"
 p=/tmp/$(uuidgen)/EFI
 mkdir -p "${p}" || exit 1
 if diskutil info  disk"${N}" |  grep -q FDisk_partition_scheme; then
