@@ -14,7 +14,9 @@ This choice will setup selected HFS/Fat32 partition to be active.
 
 Warning: ⚠️ If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
 Therefore, be sure to back up this folder if necessary!
-
+#### EFI Folder ➤ /EFI/BOOT/`BOOTX64.efi` /EFI/CLOVER/`CLOVERX64.efi` is `CloverV2-r5168` 
+- You can change both files to the latest version if you wish.
+------------------------------------------------------------
 ### Usage: ⬇︎
 - Git Clone
 
