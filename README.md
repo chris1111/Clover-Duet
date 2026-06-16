@@ -12,6 +12,8 @@ This choice will setup selected HFS/Fat32 partition to be active.
 - "Boot6 = Clover EFI 64-bits using SATA to access drives. "
 - "Boot7 = Clover EFI 64-bits using Bios Block I/O to access drives. "
 
+#### View ➤ [Clover Duet Script](https://github.com/chris1111/Clover-Duet/blob/main/Clover%20Duet.tool)
+
 Warning: ⚠️ If an EFI folder exists in the EFI partition you have chosen, it will be replaced by the Generic EFI folder.
 Therefore, be sure to back up this folder if necessary!
 #### EFI Folder ➤ /EFI/BOOT/`BOOTX64.efi` /EFI/CLOVER/`CLOVERX64.efi` is `CloverV2-r5168` 

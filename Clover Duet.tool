@@ -8,8 +8,6 @@ apptitle="Installer Clover Duet"
 version="1.0"
 find . -name '.DS_Store' -type f -delete
 
-
-
 # Install Clover Duet to the Disk.
 diskutil list
 echo "Make sure the Sip is disabled!"
