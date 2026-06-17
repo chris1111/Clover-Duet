@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 PARENTDIR=$(dirname "$0")
 cd "$PARENTDIR"
 # Copyright (c) 2026 chris1111
