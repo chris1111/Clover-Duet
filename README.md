@@ -28,7 +28,7 @@ git clone https://github.com/chris1111/Clover-Duet.git
 Or Download ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/archive/refs/heads/main.zip)
 - Run from double clic on `Clover Duet.tool`
 
-<img width="492" height="775" alt="ChooseDisk" src="https://github.com/chris1111/Clover-Duet/blob/main/ChooseDisk.png" />
+<img width="600" height="945" alt="ChooseDisk" src="https://github.com/chris1111/Clover-Duet/blob/main/ChooseDisk.png" />
 
 
 
