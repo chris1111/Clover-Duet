@@ -44,7 +44,7 @@ sudo dd if=newbs of=/dev/rdisk"${N}"s1 count=1 bs=512
 diskutil umount disk"${N}"s1
 # Create temp Mount Point
 EFIPart=/Private/tmp/PartEFI
-mkdir -p /Private/tmp/PartEFI
+mkdir -p $EFIPart
 sudo umount -f $EFIPart
 sudo mount -t msdos /dev/disk"${N}"s1 $EFIPart
 
