@@ -28,4 +28,4 @@ git clone https://github.com/chris1111/Clover-Duet.git
 Or Download ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/archive/refs/heads/main.zip)
 - Run from double clic on `Clover Duet.tool`
 
-### Usage Video: ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/blob/main/Video-Usage.md)
+### Usage Video 🎦: ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/blob/main/Video-Usage.md)
