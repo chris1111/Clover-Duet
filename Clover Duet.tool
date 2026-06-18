@@ -45,8 +45,8 @@ diskutil umount disk"${N}"s1
 # Create temp Mount Point
 EFIPart=/Private/tmp/PartEFI
 mkdir -p /Private/tmp/PartEFI
-sudo umount -f /Private/tmp/MSDOS
-sudo mount -t msdos /dev/disk"${N}"s1 /Private/tmp/PartEFI
+sudo umount -f $EFIPart
+sudo mount -t msdos /dev/disk"${N}"s1 $EFIPart
 
 echo " "
 echo "Install Clover Duet "
