@@ -25,15 +25,22 @@ if ! diskutil info disk"${N}"s1 | grep -q -e FAT_32 -e EFI; then
 fi
 
 # Write MBR
-sudo fdisk -uy -f ./CloverBootloader/usr/standalone/i386/boot0af /dev/rdisk"${N}" || exit 1
-diskutil umount disk"${N}"s1
-sudo dd if=/dev/rdisk"${N}" count=1 bs=512 of=newbs
-sudo fdisk -f ./newbs -u -y /dev/rdisk"${N}"
-sudo dd if=/dev/rdisk"${N}"s1 count=1  of=origbs
-sudo cp -v ./CloverBootloader/usr/standalone/i386/boot1f32 newbs
+diskloader=./CloverBootloader/usr/standalone/i386/boot0af
+partitionloaderfat=./CloverBootloader/usr/standalone/i386/boot1f32
+boot6=./CloverBootloader/usr/standalone/i386/x64/boot6
+boot7=./CloverBootloader/usr/standalone/i386/x64/boot7
+EFIFOLDER=./CloverBootloader/EFI
+sudo fdisk -uy -f $diskloader /dev/rdisk"${N}" || exit 1
+sudo diskutil umount disk"${N}"s1
+sudo dd if=/dev/rdisk"${N}" count=1 bs=512 of=origMBR
+sudo cp ./origMBR ./newMBR
+sudo dd if=$diskloader of=origMBR bs=440 count=1 conv=notrunc
+sudo fdisk -f ./newMBR -u -y /dev/disk"${N}"
+sudo dd if=/dev/rdisk"${N}"s1 count=1 bs=512 of=origbs
+sudo cp -v $partitionloaderfat newbs
 sudo dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc
-sudo dd if=/dev/random of=newbs skip=496 seek=496 bs=1 count=14 conv=notrunc
-sudo dd if=newbs of=/dev/rdisk"${N}"s1
+sudo dd if=newbs of=/dev/rdisk"${N}"s1 count=1 bs=512
+diskutil umount disk"${N}"s1
 #if [[ "$(sudo diskutil mount disk"${N}"s1)" == *"mounted" ]]
 if sudo diskutil mount disk"${N}"s1 | grep -q mounted; then
 
@@ -58,11 +65,11 @@ options=("Boot6" "Boot7")
 # Function 1
 function option1 {
 echo "You selected Boot6"
-cp -v "./CloverBootloader/usr/standalone/i386/x64/boot6" "$(diskutil info  disk"${N}"s1 |    sed -n 's/.*Mount Point: *//p')/boot"
+cp -v "$boot6" "$(diskutil info  disk"${N}"s1 |    sed -n 's/.*Mount Point: *//p')/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
 rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
 Sleep 1
-cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
+cp -Rp $EFIFOLDER "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
 echo "Installing EFI -> /dev/disk"${N}"s1 "
 install_log="$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI/Clover_Install_Log.txt"
 # ---------------------------------------------
@@ -75,14 +82,16 @@ echo "======================================================" >> "$install_log"
 diskutil list >> "$install_log"
 echo "================= Clover Duet boot6 ==================" >> "${install_log}"
 echo "======================================================" >> "${install_log}"
-echo ⎡Clover Duet boot6 install to /dev/disk"${N}"s1⎤ >> "$install_log"
-echo ⎡dd if=/dev/disk"${N}" count=1 bs=512 of=newbs⎤ >> "$install_log"
-echo ⎡fdisk -f ./newbs -u -y /dev/disk"${N}"⎤ >> "$install_log"
-echo ⎡dd if=/dev/disk"${N}"s1 count=1 of=origbs⎤ >> "$install_log"
-echo ⎡cp CloverBootloader/usr/standalone/i386/boot1f32 newbs⎤ >> "$install_log"
+echo ⎡Clover Duet ⎡boot6⎤ install to /dev/disk"${N}"s1⎤ >> "$install_log"
+echo ⎡fdisk -uy -f $diskloader /dev/rdisk"${N}"⎤ >> "$install_log"
+echo ⎡dd if=/dev/rdisk"${N}" count=1 bs=512 of=origMBR⎤ >> "$install_log"
+echo ⎡cp ./origMBR ./newMBR⎤ >> "$install_log"
+echo ⎡dd if=$diskloader of=./origMBR bs=440 count=1 conv=notrunc⎤ >> "$install_log"
+echo ⎡fdisk -f ./newMBR -u -y /dev/disk"${N}"⎤ >> "$install_log"
+echo ⎡dd if=/dev/rdisk"${N}"s1 count=1 bs=512 of=origbs⎤ >> "$install_log"
+echo ⎡cp -v $partitionloaderfat newbs⎤ >> "$install_log"
 echo ⎡dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc⎤ >> "$install_log"
-echo ⎡dd if=/dev/random of=newbs skip=496 seek=496 bs=1 count=14 conv=notrunc⎤ >> "$install_log"
-echo ⎡dd if=newbs of=/dev/disk"${N}"s1⎤ >> "$install_log"
+echo ⎡dd if=newbs of=/dev/rdisk"${N}"s1 count=1 bs=512⎤ >> "$install_log"
 echo "======================================================" >> "${install_log}"
 echo "======================================================" >> "${install_log}"
 echo "=========== Clover Duet Installation Finish ==========" >> "${install_log}"
@@ -101,6 +110,8 @@ fi
 Sleep 1
 rm -rf ./origbs
 rm -rf ./newbs
+rm -rf ./origMBR
+rm -rf ./newMBR
 echo "Done!"
 Open "$(diskutil info  disk"${N}"s1 |  sed -n 's/.*Mount Point: *//p')" 
 }
@@ -108,11 +119,11 @@ Open "$(diskutil info  disk"${N}"s1 |  sed -n 's/.*Mount Point: *//p')"
 # Function 2
 function option2 {
 echo "You selected Boot7"
-cp -v "./CloverBootloader/usr/standalone/i386/x64/boot7" "$(diskutil info  disk"${N}"s1 |    sed -n 's/.*Mount Point: *//p')/boot"
+cp -v "$boot7" "$(diskutil info  disk"${N}"s1 |    sed -n 's/.*Mount Point: *//p')/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
 rm -rf "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI"
 Sleep 1
-cp -Rp ./CloverBootloader/EFI "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
+cp -Rp $EFIFOLDER "$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')"
 echo "Installing EFI -> /dev/disk"${N}"s1 "
 install_log="$(diskutil info  disk${N}s1 |  sed -n 's/.*Mount Point: *//p')/EFI/Clover_Install_Log.txt"
 # ---------------------------------------------
@@ -125,14 +136,16 @@ echo "======================================================" >> "$install_log"
 diskutil list >> "$install_log"
 echo "================= Clover Duet boot7 ==================" >> "${install_log}"
 echo "======================================================" >> "${install_log}"
-echo ⎡Clover Duet boot7 install to /dev/disk"${N}"s1⎤ >> "$install_log"
-echo ⎡dd if=/dev/disk"${N}" count=1 bs=512 of=newbs⎤ >> "$install_log"
-echo ⎡fdisk -f ./newbs -u -y /dev/disk"${N}"⎤ >> "$install_log"
-echo ⎡dd if=/dev/disk"${N}"s1 count=1 of=origbs⎤ >> "$install_log"
-echo ⎡cp CloverBootloader/usr/standalone/i386/boot1f32 newbs⎤ >> "$install_log"
+echo ⎡Clover Duet ⎡boot7⎤ install to /dev/disk"${N}"s1⎤ >> "$install_log"
+echo ⎡fdisk -uy -f $diskloader /dev/rdisk"${N}"⎤ >> "$install_log"
+echo ⎡dd if=/dev/rdisk"${N}" count=1 bs=512 of=origMBR⎤ >> "$install_log"
+echo ⎡cp ./origMBR ./newMBR⎤ >> "$install_log"
+echo ⎡dd if=$diskloader of=./origMBR bs=440 count=1 conv=notrunc⎤ >> "$install_log"
+echo ⎡fdisk -f ./newMBR -u -y /dev/disk"${N}"⎤ >> "$install_log"
+echo ⎡dd if=/dev/rdisk"${N}"s1 count=1 bs=512 of=origbs⎤ >> "$install_log"
+echo ⎡cp -v $partitionloaderfat newbs⎤ >> "$install_log"
 echo ⎡dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc⎤ >> "$install_log"
-echo ⎡dd if=/dev/random of=newbs skip=496 seek=496 bs=1 count=14 conv=notrunc⎤ >> "$install_log"
-echo ⎡dd if=newbs of=/dev/disk"${N}"s1⎤ >> "$install_log"
+echo ⎡dd if=newbs of=/dev/rdisk"${N}"s1 count=1 bs=512⎤ >> "$install_log"
 echo "======================================================" >> "${install_log}"
 echo "======================================================" >> "${install_log}"
 echo "=========== Clover Duet Installation Finish ==========" >> "${install_log}"
@@ -151,6 +164,8 @@ fi
 Sleep 1
 rm -rf ./origbs
 rm -rf ./newbs
+rm -rf ./origMBR
+rm -rf ./newMBR
 echo "Done!"
 Open "$(diskutil info  disk"${N}"s1 |  sed -n 's/.*Mount Point: *//p')"     
 }
