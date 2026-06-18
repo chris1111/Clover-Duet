@@ -2,7 +2,7 @@
 
 Usage: Clover-Duet for HFS and APFS Volumes ⬇︎
 
-[![Modular Image Creation](https://github.com/chris1111/Clover-Duet/CloverBootloader/blob/main/ChooseDisk.png)]( )
+[![Modular Image Creation](https://github.com/chris1111/Clover-Duet/blob/main/CloverBootloader/ChooseDisk.png)]( )
 
 
 
