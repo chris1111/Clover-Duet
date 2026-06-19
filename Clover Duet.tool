@@ -25,11 +25,11 @@ if ! diskutil info disk"${N}"s1 | grep -q -e FAT_32 -e EFI; then
 fi
 
 # Vars
-diskloader=./CloverBootloader/usr/standalone/i386/boot0af
-partitionloaderfat=./CloverBootloader/usr/standalone/i386/boot1f32
-boot6=./CloverBootloader/usr/standalone/i386/x64/boot6
-boot7=./CloverBootloader/usr/standalone/i386/x64/boot7
-EFIFOLDER=./CloverBootloader/EFI
+diskloader="./CloverBootloader/usr/standalone/i386/boot0af"
+partitionloaderfat="./CloverBootloader/usr/standalone/i386/boot1f32"
+boot6="./CloverBootloader/usr/standalone/i386/x64/boot6"
+boot7="./CloverBootloader/usr/standalone/i386/x64/boot7"
+EFIFOLDER="./CloverBootloader/EFI"
 # Write MBR
 sudo fdisk -uy -f $diskloader /dev/rdisk"${N}" || exit 1
 sudo diskutil umount disk"${N}"s1
@@ -43,10 +43,10 @@ sudo dd if=origbs of=newbs skip=3 seek=3 bs=1 count=87 conv=notrunc
 sudo dd if=newbs of=/dev/rdisk"${N}"s1 count=1 bs=512
 diskutil umount disk"${N}"s1
 # Create temp Mount Point
-EFIPart=/Private/tmp/PartEFI
-mkdir -p $EFIPart
-sudo umount -f $EFIPart
-sudo mount -t msdos /dev/disk"${N}"s1 $EFIPart
+EFIPart="/Private/tmp/PartEFI"
+mkdir -p "$EFIPart"
+sudo umount -f "$EFIPart"
+sudo mount -t msdos /dev/disk"${N}"s1 "$EFIPart"
 
 echo " "
 echo "Install Clover Duet "
@@ -67,11 +67,11 @@ options=("Boot6" "Boot7")
 # Function 1
 function option1 {
 echo "You selected Boot6"
-cp -v "$boot6" $EFIPart/boot
+cp -v "$boot6" "$EFIPart/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
-rm -rf $EFIPart/EFI
+rm -rf "$EFIPart/EFI"
 Sleep 1
-cp -Rp $EFIFOLDER $EFIPart
+cp -Rp "$EFIFOLDER" "$EFIPart"
 echo "Installing EFI -> /dev/disk"${N}"s1 "
 install_log="$EFIPart/EFI/Clover_Install_Log.txt"
 # ---------------------------------------------
@@ -115,17 +115,17 @@ rm -rf ./newbs
 rm -rf ./origMBR
 rm -rf ./newMBR
 echo "Done!"
-Open $EFIPart 
+Open "$EFIPart" 
 }
 
 # Function 2
 function option2 {
 echo "You selected Boot7"
-cp -v "$boot7" $EFIPart/boot
+cp -v "$boot7" "$EFIPart/boot"
 echo  -e "Installing Generic Legacy EFI\033[33;5;7m Wait. . .\033[0m"
-rm -rf $EFIPart/EFI
+rm -rf "$EFIPart/EFI"
 Sleep 1
-cp -Rp $EFIFOLDER $EFIPart
+cp -Rp "$EFIFOLDER" "$EFIPart"
 echo "Installing EFI -> /dev/disk"${N}"s1 "
 install_log="$EFIPart/EFI/Clover_Install_Log.txt"
 # ---------------------------------------------
@@ -169,7 +169,7 @@ rm -rf ./newbs
 rm -rf ./origMBR
 rm -rf ./newMBR
 echo "Done!"
-Open $EFIPart     
+Open "$EFIPart"     
 }
 
 # Display menu
