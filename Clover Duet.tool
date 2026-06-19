@@ -12,6 +12,7 @@ BOOTLOADER6="./CloverBootloader/usr/standalone/i386/x64/boot6"
 BOOTLOADER7="./CloverBootloader/usr/standalone/i386/x64/boot7"
 BOOTSECTTOR="./CloverBootloader/usr/standalone/i386/boot1f32"
 
+# Validate
 if [[ -d "$EFIFOLDER" && -f "$BOOTLOADER6" && -f "$BOOTLOADER7" && -f "$BOOTSECTTOR" ]]; then
  echo "Boot files is in your path!"
  Sleep 1
