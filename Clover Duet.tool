@@ -7,6 +7,19 @@ cd "$PARENTDIR"
 apptitle="Installer Clover Duet"
 version="1.0"
 find . -name '.DS_Store' -type f -delete
+EFIFOLDER="./CloverBootloader/EFI"
+BOOTLOADER6="./CloverBootloader/usr/standalone/i386/x64/boot6"
+BOOTLOADER7="./CloverBootloader/usr/standalone/i386/x64/boot7"
+BOOTSECTTOR="./CloverBootloader/usr/standalone/i386/boot1f32"
+
+if [[ -d "$EFIFOLDER" && -f "$BOOTLOADER6" && -f "$BOOTLOADER7" && -f "$BOOTSECTTOR" ]]; then
+ echo "Boot files is in your path!"
+ Sleep 1
+else
+ echo "Boot files are missing in your path!"
+ Sleep 3
+ exit
+fi
 
 # Install Clover Duet to the Disk.
 diskutil list
