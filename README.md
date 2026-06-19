@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/chris1111/Clover-Duet/blob/main/LICENSE)
 # Clover-Duet
-### Usage Video 🎦 ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/blob/main/Video-Usage.md)
+###  🎦 Video Usage ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/blob/main/Video-Usage.md)
 ### Credit [Clover Team](https://github.com/CloverHackyColor/CloverBootloader)
 - You can boot a 10.6 System up to macOS Tahoe 26
 - Clover will be Install in the ESP (EFI System Partition) of the target volume
