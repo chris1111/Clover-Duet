@@ -11,6 +11,10 @@ EFIFOLDER="./CloverBootloader/EFI"
 BOOTLOADER6="./CloverBootloader/usr/standalone/i386/x64/boot6"
 BOOTLOADER7="./CloverBootloader/usr/standalone/i386/x64/boot7"
 BOOTSECTTOR="./CloverBootloader/usr/standalone/i386/boot1f32"
+rm -rf ./origbs
+rm -rf ./newbs
+rm -rf ./origMBR
+rm -rf ./newMBR
 
 # Validate
 if [[ -d "$EFIFOLDER" && -f "$BOOTLOADER6" && -f "$BOOTLOADER7" && -f "$BOOTSECTTOR" ]]; then
