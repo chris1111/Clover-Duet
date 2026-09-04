@@ -29,7 +29,7 @@ fi
 diskutil list
 echo "Make sure the Sip is disabled!"
 echo "Enter the EFI disk number to install Clover Duet
-Exemple: -> 13"
+Exemple: -> 3"
 read -r N
 N="${N#disk}"
 
