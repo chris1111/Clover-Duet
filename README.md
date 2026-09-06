@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/chris1111/Clover-Duet/blob/main/LICENSE)
 # Clover-Duet
 
-<img width="250" height="232" alt="Logo" src="https://github.com/user-attachments/assets/c82a7279-b99c-4c3d-8db1-f3170d3fb82d" />
+<img src="CloverBootloader/CloverDuet.png" alt="Github Project" style="width:20%;">
 
 ### Script for macOS only!
 ###  🎦 Video Usage ➤ [Clover-Duet](https://github.com/chris1111/Clover-Duet/blob/main/Video-Usage.md)
